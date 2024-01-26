@@ -943,7 +943,7 @@ const ue = (e, o) => {
   iconProps: de
 }, Symbol.toStringTag, { value: "Module" })), ro = h({
   name: "LIcon",
-  props: { ...de, ...H },
+  props: Object.assign({}, de, H),
   setup(e, o) {
     const t = u(), n = j(L), r = m(be), s = m(ve), l = m(ge);
     let a, i, c, d, y;
@@ -1751,11 +1751,11 @@ const $t = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
         return console.error("LTileLayer: url prop is required");
       t.value = _(a(e.url, s));
       const { listeners: i } = T(o.attrs);
-      t.value.on(i), O(l, t.value, e), r({
-        ...e,
-        ...l,
-        leafletObject: t.value
-      }), f(() => o.emit("ready", t.value));
+      t.value.on(i), O(l, t.value, e), r(
+        Object.assign({}, e, l, {
+          leafletObject: t.value
+        })
+      ), f(() => o.emit("ready", t.value));
     }), { leafletObject: t };
   },
   render() {

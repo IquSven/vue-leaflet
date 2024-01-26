@@ -23,7 +23,7 @@ import {
  */
 export default defineComponent({
   name: "LIcon",
-  props: { ...iconProps, ...componentProps },
+  props: Object.assign({}, iconProps, componentProps),
   setup(props, context) {
     const root = ref<HTMLInputElement>();
 
