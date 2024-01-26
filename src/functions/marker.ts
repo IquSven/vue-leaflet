@@ -8,24 +8,27 @@ import { layerProps, setupLayer } from "./layer";
 const unrenderedContentTypes = ["Symbol(Comment)", "Symbol(Text)"];
 const unrenderedComponentNames = ["LTooltip", "LPopup"];
 
-export const markerProps = {
-  ...layerProps,
-  draggable: {
-    type: Boolean,
-    default: undefined,
-  },
-  icon: {
-    type: [Object] as PropType<L.Icon>,
-  },
-  zIndexOffset: {
-    type: Number,
-  },
-  latLng: {
-    type: [Object, Array] as PropType<L.LatLngExpression>,
-    custom: true,
-    required: true,
-  },
-} as const;
+export const markerProps = Object.assign(
+  {},
+  layerProps,
+  {
+    draggable: {
+      type: Boolean,
+      default: undefined,
+    },
+    icon: {
+      type: [Object] as PropType<L.Icon>,
+    },
+    zIndexOffset: {
+      type: Number,
+    },
+    latLng: {
+      type: [Object, Array] as PropType<L.LatLngExpression>,
+      custom: true,
+      required: true,
+    },
+  }
+);
 
 export const setupMarker = (props, leafletRef, context) => {
   const { options: layerOptions, methods: layerMethods } = setupLayer(
@@ -40,32 +43,35 @@ export const setupMarker = (props, leafletRef, context) => {
     layerOptions
   );
 
-  const methods = {
-    ...layerMethods,
-    setDraggable(value) {
-      if (leafletRef.value.dragging) {
-        value
-          ? leafletRef.value.dragging.enable()
-          : leafletRef.value.dragging.disable();
-      }
-    },
-    latLngSync(event) {
-      context.emit("update:latLng", event.latlng);
-      context.emit("update:lat-lng", event.latlng);
-    },
-    setLatLng(newVal) {
-      if (newVal == null) {
-        return;
-      }
-
-      if (leafletRef.value) {
-        const oldLatLng = leafletRef.value.getLatLng();
-        if (!oldLatLng || !oldLatLng.equals(newVal)) {
-          leafletRef.value.setLatLng(newVal);
+  const methods = Object.assign(
+    {},
+    layerMethods,
+    {
+      setDraggable(value) {
+        if (leafletRef.value.dragging) {
+          value
+            ? leafletRef.value.dragging.enable()
+            : leafletRef.value.dragging.disable();
         }
-      }
-    },
-  };
+      },
+      latLngSync(event) {
+        context.emit("update:latLng", event.latlng);
+        context.emit("update:lat-lng", event.latlng);
+      },
+      setLatLng(newVal) {
+        if (newVal == null) {
+          return;
+        }
+
+        if (leafletRef.value) {
+          const oldLatLng = leafletRef.value.getLatLng();
+          if (!oldLatLng || !oldLatLng.equals(newVal)) {
+            leafletRef.value.setLatLng(newVal);
+          }
+        }
+      },
+    }
+  );
 
   return { options, methods };
 };

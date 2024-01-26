@@ -22,8 +22,7 @@ import { WINDOW_OR_GLOBAL, assertInject, propsBinder } from "@src/utils.js";
 
 export default defineComponent({
   name: "LControl",
-  props: {
-    ...controlProps,
+  props: Object.assign({
     disableClickPropagation: {
       type: Boolean,
       custom: true,
@@ -34,7 +33,10 @@ export default defineComponent({
       custom: true,
       default: false,
     },
-  },
+    controlProps,
+  }
+
+  ),
   setup(props, context) {
     const leafletObject = ref<L.Control>();
     const root = ref<HTMLInputElement>();

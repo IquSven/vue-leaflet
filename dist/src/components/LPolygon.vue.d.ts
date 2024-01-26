@@ -3,193 +3,201 @@ import type L from "leaflet";
  * Polygon component, lets you add and customize polygon regions on the map
  */
 declare const _sfc_main: import("vue").DefineComponent<{
-    readonly smoothFactor: {
-        readonly type: NumberConstructor;
-    };
-    readonly noClip: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly latLngs: {
-        readonly type: import("vue").PropType<L.LatLngExpression[]>;
-        readonly required: true;
-        readonly custom: true;
-    };
-    readonly stroke: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly color: {
-        readonly type: StringConstructor;
-    };
-    /**
-     * Polygon component, lets you add and customize polygon regions on the map
-     */
-    readonly weight: {
-        readonly type: NumberConstructor;
-    };
-    readonly opacity: {
-        readonly type: NumberConstructor;
-    };
-    readonly lineCap: {
-        readonly type: StringConstructor;
-    };
-    readonly lineJoin: {
-        readonly type: StringConstructor;
-    };
-    readonly dashArray: {
-        readonly type: StringConstructor;
-    };
-    readonly dashOffset: {
-        readonly type: StringConstructor;
-    };
-    readonly fill: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly fillColor: {
-        readonly type: StringConstructor;
-    };
-    readonly fillOpacity: {
-        readonly type: NumberConstructor;
-    };
-    readonly fillRule: {
-        readonly type: StringConstructor;
-    };
-    readonly className: {
-        readonly type: StringConstructor;
-    };
-    readonly interactive: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly bubblingMouseEvents: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
+    };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
+    };
+} & {
+    interactive: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    bubblingMouseEvents: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+} & {
+    stroke: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    color: {
+        type: StringConstructor;
+    };
+    weight: {
+        type: NumberConstructor;
+    };
+    opacity: {
+        type: NumberConstructor;
+    };
+    lineCap: {
+        type: StringConstructor;
+    };
+    lineJoin: {
+        type: StringConstructor;
+    };
+    dashArray: {
+        type: StringConstructor;
+    };
+    dashOffset: {
+        type: StringConstructor;
+    };
+    fill: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    fillColor: {
+        type: StringConstructor;
+    };
+    fillOpacity: {
+        type: NumberConstructor;
+    };
+    fillRule: {
+        type: StringConstructor;
+    };
+    className: {
+        type: StringConstructor;
+    };
+} & {
+    smoothFactor: {
+        type: NumberConstructor;
+    };
+    noClip: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    latLngs: {
+        type: import("vue").PropType<L.LatLngExpression[]>;
+        required: boolean;
+        /**
+         * Polygon component, lets you add and customize polygon regions on the map
+         */
+        custom: boolean;
     };
 }, {
     ready: import("vue").Ref<boolean>;
     leafletObject: import("vue").Ref<L.Polygon<any> | undefined>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
-    readonly smoothFactor: {
-        readonly type: NumberConstructor;
-    };
-    readonly noClip: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly latLngs: {
-        readonly type: import("vue").PropType<L.LatLngExpression[]>;
-        readonly required: true;
-        readonly custom: true;
-    };
-    readonly stroke: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly color: {
-        readonly type: StringConstructor;
-    };
-    /**
-     * Polygon component, lets you add and customize polygon regions on the map
-     */
-    readonly weight: {
-        readonly type: NumberConstructor;
-    };
-    readonly opacity: {
-        readonly type: NumberConstructor;
-    };
-    readonly lineCap: {
-        readonly type: StringConstructor;
-    };
-    readonly lineJoin: {
-        readonly type: StringConstructor;
-    };
-    readonly dashArray: {
-        readonly type: StringConstructor;
-    };
-    readonly dashOffset: {
-        readonly type: StringConstructor;
-    };
-    readonly fill: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly fillColor: {
-        readonly type: StringConstructor;
-    };
-    readonly fillOpacity: {
-        readonly type: NumberConstructor;
-    };
-    readonly fillRule: {
-        readonly type: StringConstructor;
-    };
-    readonly className: {
-        readonly type: StringConstructor;
-    };
-    readonly interactive: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly bubblingMouseEvents: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
     };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
+    };
+} & {
+    interactive: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    bubblingMouseEvents: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+} & {
+    stroke: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    color: {
+        type: StringConstructor;
+    };
+    weight: {
+        type: NumberConstructor;
+    };
+    opacity: {
+        type: NumberConstructor;
+    };
+    lineCap: {
+        type: StringConstructor;
+    };
+    lineJoin: {
+        type: StringConstructor;
+    };
+    dashArray: {
+        type: StringConstructor;
+    };
+    dashOffset: {
+        type: StringConstructor;
+    };
+    fill: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    fillColor: {
+        type: StringConstructor;
+    };
+    fillOpacity: {
+        type: NumberConstructor;
+    };
+    fillRule: {
+        type: StringConstructor;
+    };
+    className: {
+        type: StringConstructor;
+    };
+} & {
+    smoothFactor: {
+        type: NumberConstructor;
+    };
+    noClip: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    latLngs: {
+        type: import("vue").PropType<L.LatLngExpression[]>;
+        required: boolean;
+        /**
+         * Polygon component, lets you add and customize polygon regions on the map
+         */
+        custom: boolean;
+    };
 }>>, {
-    readonly fill: boolean;
-    readonly stroke: boolean;
-    readonly interactive: boolean;
-    readonly bubblingMouseEvents: boolean;
-    readonly visible: boolean;
+    fill: boolean;
     readonly options: Record<string, any>;
-    readonly noClip: boolean;
+    visible: boolean;
+    interactive: boolean;
+    bubblingMouseEvents: boolean;
+    stroke: boolean;
+    noClip: boolean;
 }>;
 export default _sfc_main;

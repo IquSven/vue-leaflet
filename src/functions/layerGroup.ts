@@ -9,9 +9,7 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { layerProps, setupLayer } from "./layer";
 
-export const layerGroupProps = {
-  ...layerProps,
-} as const;
+export const layerGroupProps = Object.assign({}, layerProps);
 
 export const setupLayerGroup = (props, leafletRef, context) => {
   const { options: layerOptions, methods: layerMethods } = setupLayer(
@@ -26,15 +24,18 @@ export const setupLayerGroup = (props, leafletRef, context) => {
     layerOptions
   );
 
-  const methods = {
-    ...layerMethods,
-    addLayer(layer) {
-      leafletRef.value.addLayer(layer.leafletObject);
-    },
-    removeLayer(layer) {
-      leafletRef.value.removeLayer(layer.leafletObject);
-    },
-  };
+  const methods = Object.assign(
+    {},
+    layerMethods,
+    {
+      addLayer(layer) {
+        leafletRef.value.addLayer(layer.leafletObject);
+      },
+      removeLayer(layer) {
+        leafletRef.value.removeLayer(layer.leafletObject);
+      },
+    }
+  );
 
   provide(AddLayerInjection, methods.addLayer);
   provide(RemoveLayerInjection, methods.removeLayer);

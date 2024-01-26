@@ -44,8 +44,8 @@ import {
 
 type StyleableAttrs = Data & { style: Data };
 
-const mapProps = {
-  ...componentProps,
+const mapProps = Object.assign({},
+  componentProps, {
   /**
    * The center of the map, supports .sync modifier
    */
@@ -156,7 +156,7 @@ const mapProps = {
     default: true,
     custom: true,
   },
-};
+});
 
 export default defineComponent({
   inheritAttrs: false,
@@ -409,10 +409,10 @@ export default defineComponent({
 
     return h(
       "div",
-      {
-        ...attrs,
-        ref: "root",
-      },
+      Object.assign({},
+        attrs,
+        { ref: "root" },
+      ),
       this.ready && this.$slots.default ? this.$slots.default() : {}
     );
   },

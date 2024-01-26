@@ -4,33 +4,36 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { setupTileLayer, tileLayerProps } from "./tileLayer";
 
-export const wmsTileLayerProps = {
-  ...tileLayerProps,
-  layers: {
-    type: String,
-    required: true,
-  },
-  styles: {
-    type: String,
-  },
-  format: {
-    type: String,
-  },
-  transparent: {
-    type: Boolean,
-    default: undefined,
-  },
-  version: {
-    type: String,
-  },
-  crs: {
-    type: Object,
-  },
-  uppercase: {
-    type: Boolean,
-    default: undefined,
-  },
-} as const;
+export const wmsTileLayerProps = Object.assign(
+  {},
+  tileLayerProps,
+  {
+    layers: {
+      type: String,
+      required: true,
+    },
+    styles: {
+      type: String,
+    },
+    format: {
+      type: String,
+    },
+    transparent: {
+      type: Boolean,
+      default: undefined,
+    },
+    version: {
+      type: String,
+    },
+    crs: {
+      type: Object,
+    },
+    uppercase: {
+      type: Boolean,
+      default: undefined,
+    },
+  }
+);
 
 export const setupWMSTileLayer = (props, leafletRef, context) => {
   const { options: tileLayerOptions, methods: tileLayerMethods } =
@@ -42,10 +45,5 @@ export const setupWMSTileLayer = (props, leafletRef, context) => {
     tileLayerOptions
   );
 
-  return {
-    options,
-    methods: {
-      ...tileLayerMethods,
-    },
-  };
+  return { options, methods: Object.assign({}, tileLayerMethods), };
 };

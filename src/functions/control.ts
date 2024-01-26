@@ -5,12 +5,15 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { componentProps, setupComponent } from "./component";
 
-export const controlProps = {
-  ...componentProps,
-  position: {
-    type: String as PropType<L.ControlPosition>,
-  },
-} as const;
+export const controlProps = Object.assign(
+  {},
+  componentProps,
+  {
+    position: {
+      type: String as PropType<L.ControlPosition>,
+    },
+  }
+);
 
 export const setupControl = (props, leafletRef) => {
   const { options: componentOptions, methods: componentMethods } =
@@ -22,14 +25,17 @@ export const setupControl = (props, leafletRef) => {
     componentOptions
   );
 
-  const methods = {
-    ...componentMethods,
-    setPosition(position) {
-      if (leafletRef.value) {
-        leafletRef.value.setPosition(position);
-      }
-    },
-  };
+  const methods = Object.assign(
+    {},
+    componentMethods,
+    {
+      setPosition(position) {
+        if (leafletRef.value) {
+          leafletRef.value.setPosition(position);
+        }
+      },
+    }
+  );
 
   onUnmounted(() => {
     if (leafletRef.value) {

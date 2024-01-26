@@ -41,11 +41,9 @@ export default defineComponent({
 
       propsBinder(methods, leafletObject.value, props);
 
-      registerLayerControl({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      registerLayerControl(
+        Object.assign({}, props, methods, { leafletObject: leafletObject.value })
+      );
       nextTick(() => context.emit("ready", leafletObject.value));
     });
 

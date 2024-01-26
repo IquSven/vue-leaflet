@@ -53,11 +53,9 @@ export default defineComponent({
       leafletObject.value.on(listeners);
 
       propsBinder(methods, leafletObject.value, props);
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, { leafletObject: leafletObject.value })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

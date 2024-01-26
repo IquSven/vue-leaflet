@@ -5,32 +5,35 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { gridLayerProps, setupGridLayer } from "./gridLayer";
 
-export const tileLayerProps = {
-  ...gridLayerProps,
-  tms: {
-    type: Boolean,
-    default: undefined,
-  },
-  subdomains: {
-    type: [String, Array] as PropType<String | String[]>,
-    validator: (prop) => {
-      if (typeof prop === "string") return true;
-      if (Array.isArray(prop)) {
-        return prop.every((subdomain) => typeof subdomain === "string");
-      }
-      return false;
+export const tileLayerProps = Object.assign(
+  {},
+  gridLayerProps,
+  {
+    tms: {
+      type: Boolean,
+      default: undefined,
     },
-  },
-  detectRetina: {
-    type: Boolean,
-    default: undefined,
-  },
-  url: {
-    type: String,
-    required: true,
-    custom: true,
-  },
-} as const;
+    subdomains: {
+      type: [String, Array] as PropType<String | String[]>,
+      validator: (prop) => {
+        if (typeof prop === "string") return true;
+        if (Array.isArray(prop)) {
+          return prop.every((subdomain) => typeof subdomain === "string");
+        }
+        return false;
+      },
+    },
+    detectRetina: {
+      type: Boolean,
+      default: undefined,
+    },
+    url: {
+      type: String,
+      required: true,
+      custom: true,
+    },
+  }
+);
 
 export const setupTileLayer = (props, leafletRef, context) => {
   const { options: gridLayerOptions, methods: gridLayerMethods } =
@@ -42,9 +45,7 @@ export const setupTileLayer = (props, leafletRef, context) => {
     gridLayerOptions
   );
 
-  const methods = {
-    ...gridLayerMethods,
-  };
+  const methods = Object.assign({}, gridLayerMethods);
 
   return { options, methods };
 };

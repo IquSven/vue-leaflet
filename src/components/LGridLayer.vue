@@ -29,13 +29,12 @@ import {
 } from "@src/utils.js";
 
 export default defineComponent({
-  props: {
-    ...gridLayerProps,
+  props: Object.assign({}, gridLayerProps, {
     childRender: {
       type: Function as PropType<VueGridLayerTileRenderer>,
       required: true,
     },
-  },
+  }),
   setup(props, context) {
     const leafletObject = ref<L.GridLayer>();
     const root = ref(null);
@@ -51,6 +50,8 @@ export default defineComponent({
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
 
+      if (!props.childRender)
+        return console.error("LGridLayer: childRender prop is required");
       const GLayer = CreateVueGridLayer(
         GridLayer,
         DomUtil,
@@ -63,11 +64,11 @@ export default defineComponent({
       leafletObject.value.on(listeners);
 
       propsBinder(methods, leafletObject.value, props);
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

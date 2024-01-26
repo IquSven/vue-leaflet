@@ -4,21 +4,24 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { controlProps, setupControl } from "./control";
 
-export const controlZoomProps = {
-  ...controlProps,
-  zoomInText: {
-    type: String,
-  },
-  zoomInTitle: {
-    type: String,
-  },
-  zoomOutText: {
-    type: String,
-  },
-  zoomOutTitle: {
-    type: String,
-  },
-} as const;
+export const controlZoomProps = Object.assign(
+  {},
+  controlProps,
+  {
+    zoomInText: {
+      type: String,
+    },
+    zoomInTitle: {
+      type: String,
+    },
+    zoomOutText: {
+      type: String,
+    },
+    zoomOutTitle: {
+      type: String,
+    },
+  }
+);
 
 export const setupControlZoom = (props, leafletRef) => {
   const { options: controlOptions, methods: controlMethods } = setupControl(

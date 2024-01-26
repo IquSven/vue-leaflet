@@ -4,9 +4,7 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { polylineProps, setupPolyline } from "./polyline";
 
-export const polygonProps = {
-  ...polylineProps,
-} as const;
+export const polygonProps = Object.assign({}, polylineProps);
 
 export const setupPolygon = (props, leafletRef, context) => {
   const { options: polylineOptions, methods: polylineMethods } = setupPolyline(
@@ -21,12 +19,15 @@ export const setupPolygon = (props, leafletRef, context) => {
     polylineOptions
   );
 
-  const methods = {
-    ...polylineMethods,
-    toGeoJSON(precision) {
-      return leafletRef.value.toGeoJSON(precision);
-    },
-  };
+  const methods = Object.assign(
+    {},
+    polylineMethods,
+    {
+      toGeoJSON(precision) {
+        return leafletRef.value.toGeoJSON(precision);
+      },
+    }
+  );
 
   return { options, methods };
 };

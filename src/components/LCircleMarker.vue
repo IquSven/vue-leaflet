@@ -48,7 +48,8 @@ export default defineComponent({
       const { circleMarker }: typeof L = useGlobalLeaflet
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
-
+      if (!props.latLng)
+        return console.error("LCircleMarker: latLng prop is required");
       leafletObject.value = markRaw<L.CircleMarker>(
         circleMarker(props.latLng, options)
       );
@@ -58,11 +59,11 @@ export default defineComponent({
 
       propsBinder(methods, leafletObject.value, props);
 
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

@@ -48,6 +48,10 @@ export default defineComponent({
       const { imageOverlay }: typeof L = useGlobalLeaflet
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
+      if (!props.url)
+        return console.error("LImageOverlay: url prop is required");
+      if (!props.bounds)
+        return console.error("LImageOverlay: bounds prop is required");
       leafletObject.value = markRaw<L.ImageOverlay>(
         imageOverlay(props.url, props.bounds, options)
       );
@@ -55,11 +59,11 @@ export default defineComponent({
       const { listeners } = remapEvents(context.attrs);
       leafletObject.value.on(listeners);
       propsBinder(methods, leafletObject.value, props);
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

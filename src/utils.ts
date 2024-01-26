@@ -58,7 +58,7 @@ export const propsToLeafletOptions = <T>(
   propDefinitions,
   baseOptions = {}
 ): T => {
-  const output = { ...baseOptions };
+  const output = Object.assign({}, baseOptions);
 
   for (const prop in propValues) {
     const defn = propDefinitions[prop];

@@ -4,8 +4,7 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { layerProps, setupLayer } from "./layer";
 
-export const interactiveLayerProps = {
-  ...layerProps,
+export const interactiveLayerProps = Object.assign({}, layerProps, {
   interactive: {
     type: Boolean,
     default: undefined,
@@ -14,7 +13,7 @@ export const interactiveLayerProps = {
     type: Boolean,
     default: undefined,
   },
-} as const;
+});
 
 export const setupInteractiveLayer = (props, leafletRef, context) => {
   const { options: layerOptions, methods } = setupLayer(

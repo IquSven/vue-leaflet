@@ -41,7 +41,8 @@ export default defineComponent({
       const { polygon }: typeof L = useGlobalLeaflet
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
-
+      if(!props.latLngs)
+        return console.error("LPolygon: latLngs prop is required");
       leafletObject.value = markRaw<L.Polygon>(polygon(props.latLngs, options));
 
       const { listeners } = remapEvents(context.attrs);
@@ -49,11 +50,11 @@ export default defineComponent({
 
       propsBinder(methods, leafletObject.value, props);
 
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

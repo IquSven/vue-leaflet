@@ -1,74 +1,76 @@
 import type L from "leaflet";
 import type { PropType } from "vue";
 export declare const tileLayerProps: {
-    readonly tms: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly subdomains: {
-        readonly type: PropType<String | String[]>;
-        readonly validator: (prop: any) => boolean;
-    };
-    readonly detectRetina: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly url: {
-        readonly type: StringConstructor;
-        readonly required: true;
-        readonly custom: true;
-    };
-    readonly opacity: {
-        readonly type: NumberConstructor;
-    };
-    readonly zIndex: {
-        readonly type: NumberConstructor;
-    };
-    readonly tileSize: {
-        readonly type: PropType<Number | L.PointExpression>;
-    };
-    readonly noWrap: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly minZoom: {
-        readonly type: NumberConstructor;
-    };
-    readonly maxZoom: {
-        readonly type: NumberConstructor;
-    };
-    readonly className: {
-        readonly type: StringConstructor;
-    };
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: PropType<import("../types/enums/LayerType").LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
     };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: PropType<import("../types/enums/LayerType").LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
+    };
+} & {
+    opacity: {
+        type: NumberConstructor;
+    };
+    zIndex: {
+        type: NumberConstructor;
+    };
+    tileSize: {
+        type: PropType<Number | L.PointExpression>;
+    };
+    noWrap: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    minZoom: {
+        type: NumberConstructor;
+    };
+    maxZoom: {
+        type: NumberConstructor;
+    };
+    className: {
+        type: StringConstructor;
+    };
+} & {
+    tms: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    subdomains: {
+        type: PropType<String | String[]>;
+        validator: (prop: any) => boolean;
+    };
+    detectRetina: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    url: {
+        type: StringConstructor;
+        required: boolean;
+        custom: boolean;
+    };
 };
 export declare const setupTileLayer: (props: any, leafletRef: any, context: any) => {
     options: L.TileLayerOptions;
     methods: {
-        setTileComponent(): void;
         setAttribution(val: any): void;
         setName(): void;
         setLayerType(): void;
@@ -78,5 +80,7 @@ export declare const setupTileLayer: (props: any, leafletRef: any, context: any)
         unbindTooltip(): void;
         unbindPopup(): void;
         updateVisibleProp(value: any): void;
+    } & {
+        setTileComponent(): void;
     };
 };

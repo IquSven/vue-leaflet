@@ -5,8 +5,7 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { pathProps, setupPath as pathSetup } from "./path";
 
-export const circleMarkerProps = {
-  ...pathProps,
+export const circleMarkerProps = Object.assign({}, pathProps, {
   /**
    * Radius of the marker in pixels.
    */
@@ -18,7 +17,8 @@ export const circleMarkerProps = {
     required: true,
     custom: true,
   },
-} as const;
+});
+
 export type LCircleMarkerProps = typeof circleMarkerProps;
 
 export const setupCircleMarker = (props, leafletRef, context) => {
@@ -34,15 +34,14 @@ export const setupCircleMarker = (props, leafletRef, context) => {
     pathOptions
   );
 
-  const methods = {
-    ...pathMethods,
+  const methods = Object.assign({}, pathMethods, {
     setRadius(radius) {
       leafletRef.value.setRadius(radius);
     },
     setLatLng(latLng) {
       leafletRef.value.setLatLng(latLng);
     },
-  };
+  });
 
   return { options, methods };
 };

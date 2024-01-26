@@ -2,48 +2,44 @@ import type { GeoJsonObject } from "geojson";
 import type L from "leaflet";
 import type { PropType } from "vue";
 export declare const geoJSONProps: {
-    readonly geojson: {
-        readonly type: PropType<GeoJsonObject | GeoJsonObject[]>;
-        readonly custom: true;
-    };
-    readonly optionsStyle: {
-        readonly type: PropType<L.StyleFunction<any>>;
-        readonly custom: true;
-    };
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: PropType<import("../types/enums/LayerType").LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
     };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: PropType<import("../types/enums/LayerType").LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
+    };
+} & {
+    geojson: {
+        type: PropType<GeoJsonObject | GeoJsonObject[]>;
+        custom: boolean;
+    };
+    optionsStyle: {
+        type: PropType<L.StyleFunction<any>>;
+        custom: boolean;
+    };
 };
 export declare const setupGeoJSON: (props: any, leafletRef: any, context: any) => {
     options: L.GeoJSONOptions<any, import("geojson").Geometry>;
     methods: {
-        setGeojson(newVal: any): void;
-        setOptionsStyle(newVal: any): void;
-        getGeoJSONData(): any;
-        getBounds(): any;
-        addLayer(layer: any): void;
-        removeLayer(layer: any): void;
         setAttribution(val: any): void;
         setName(): void;
         setLayerType(): void;
@@ -53,5 +49,13 @@ export declare const setupGeoJSON: (props: any, leafletRef: any, context: any) =
         unbindTooltip(): void;
         unbindPopup(): void;
         updateVisibleProp(value: any): void;
+    } & {
+        addLayer(layer: any): void;
+        removeLayer(layer: any): void;
+    } & {
+        setGeojson(newVal: any): void;
+        setOptionsStyle(newVal: any): void;
+        getGeoJSONData(): any;
+        getBounds(): any;
     };
 };

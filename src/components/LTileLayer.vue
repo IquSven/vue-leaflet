@@ -35,7 +35,8 @@ export default defineComponent({
       const { tileLayer }: typeof L = useGlobalLeaflet
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
-
+      if (!props.url)
+        return console.error("LTileLayer: url prop is required");
       leafletObject.value = markRaw<L.TileLayer>(tileLayer(props.url, options));
 
       const { listeners } = remapEvents(context.attrs);

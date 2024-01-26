@@ -5,21 +5,24 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { pathProps, setupPath } from "./path";
 
-export const polylineProps = {
-  ...pathProps,
-  smoothFactor: {
-    type: Number,
-  },
-  noClip: {
-    type: Boolean,
-    default: undefined,
-  },
-  latLngs: {
-    type: Array as PropType<L.LatLngExpression[]>,
-    required: true,
-    custom: true,
-  },
-} as const;
+export const polylineProps = Object.assign(
+  {},
+  pathProps,
+  {
+    smoothFactor: {
+      type: Number,
+    },
+    noClip: {
+      type: Boolean,
+      default: undefined,
+    },
+    latLngs: {
+      type: Array as PropType<L.LatLngExpression[]>,
+      required: true,
+      custom: true,
+    },
+  }
+);
 
 export const setupPolyline = (props, leafletRef, context) => {
   const { options: pathOptions, methods: pathMethods } = setupPath(
@@ -34,18 +37,21 @@ export const setupPolyline = (props, leafletRef, context) => {
     pathOptions
   );
 
-  const methods = {
-    ...pathMethods,
-    setSmoothFactor(smoothFactor) {
-      leafletRef.value.setStyle({ smoothFactor });
-    },
-    setNoClip(noClip) {
-      leafletRef.value.setStyle({ noClip });
-    },
-    addLatLng(latLng) {
-      leafletRef.value.addLatLng(latLng);
-    },
-  };
+  const methods = Object.assign(
+    {},
+    pathMethods,
+    {
+      setSmoothFactor(smoothFactor) {
+        leafletRef.value.setStyle({ smoothFactor });
+      },
+      setNoClip(noClip) {
+        leafletRef.value.setStyle({ noClip });
+      },
+      addLatLng(latLng) {
+        leafletRef.value.addLatLng(latLng);
+      },
+    }
+  );
 
   return { options, methods };
 };

@@ -4,24 +4,27 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { controlProps, setupControl } from "./control";
 
-export const controlScaleProps = {
-  ...controlProps,
-  maxWidth: {
-    type: Number,
-  },
-  metric: {
-    type: Boolean,
-    default: undefined,
-  },
-  imperial: {
-    type: Boolean,
-    default: undefined,
-  },
-  updateWhenIdle: {
-    type: Boolean,
-    default: undefined,
-  },
-} as const;
+export const controlScaleProps = Object.assign(
+  {},
+  controlProps,
+  {
+    maxWidth: {
+      type: Number,
+    },
+    metric: {
+      type: Boolean,
+      default: undefined,
+    },
+    imperial: {
+      type: Boolean,
+      default: undefined,
+    },
+    updateWhenIdle: {
+      type: Boolean,
+      default: undefined,
+    },
+  }
+);
 
 export const setupControlScale = (props, leafletRef) => {
   const { options: controlOptions, methods: controlMethods } = setupControl(

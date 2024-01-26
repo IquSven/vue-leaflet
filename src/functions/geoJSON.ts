@@ -6,17 +6,20 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { layerGroupProps, setupLayerGroup } from "./layerGroup";
 
-export const geoJSONProps = {
-  ...layerGroupProps,
-  geojson: {
-    type: [Object, Array] as PropType<GeoJsonObject | GeoJsonObject[]>,
-    custom: true,
-  },
-  optionsStyle: {
-    type: Function as PropType<L.StyleFunction>,
-    custom: true,
-  },
-} as const;
+export const geoJSONProps = Object.assign(
+  {},
+  layerGroupProps,
+  {
+    geojson: {
+      type: [Object, Array] as PropType<GeoJsonObject | GeoJsonObject[]>,
+      custom: true,
+    },
+    optionsStyle: {
+      type: Function as PropType<L.StyleFunction>,
+      custom: true,
+    },
+  }
+);
 
 export const setupGeoJSON = (props, leafletRef, context) => {
   const { options: layerOptions, methods: layerGroupMethods } = setupLayerGroup(
@@ -34,22 +37,25 @@ export const setupGeoJSON = (props, leafletRef, context) => {
     options.style = props.optionsStyle;
   }
 
-  const methods = {
-    ...layerGroupMethods,
-    setGeojson(newVal) {
-      leafletRef.value.clearLayers();
-      leafletRef.value.addData(newVal);
-    },
-    setOptionsStyle(newVal) {
-      leafletRef.value.setStyle(newVal);
-    },
-    getGeoJSONData() {
-      return leafletRef.value.toGeoJSON();
-    },
-    getBounds() {
-      return leafletRef.value.getBounds();
-    },
-  };
+  const methods = Object.assign(
+    {},
+    layerGroupMethods,
+    {
+      setGeojson(newVal) {
+        leafletRef.value.clearLayers();
+        leafletRef.value.addData(newVal);
+      },
+      setOptionsStyle(newVal) {
+        leafletRef.value.setStyle(newVal);
+      },
+      getGeoJSONData() {
+        return leafletRef.value.toGeoJSON();
+      },
+      getBounds() {
+        return leafletRef.value.getBounds();
+      },
+    }
+  );
 
   return { options, methods };
 };

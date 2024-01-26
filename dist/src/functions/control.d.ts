@@ -1,13 +1,14 @@
 import type L from "leaflet";
 import { type PropType } from "vue";
 export declare const controlProps: {
-    readonly position: {
-        readonly type: PropType<L.ControlPosition>;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
+    };
+} & {
+    position: {
+        type: PropType<L.ControlPosition>;
     };
 };
 export declare const setupControl: (props: any, leafletRef: any) => {

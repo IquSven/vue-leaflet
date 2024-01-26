@@ -2,6 +2,12 @@ import type L from "leaflet";
 import { type PropType } from "vue";
 import { type Data } from '../utils.js';
 declare const _sfc_main: import("vue").DefineComponent<{
+    readonly options: {
+        readonly type: ObjectConstructor;
+        readonly default: () => {};
+        readonly custom: true;
+    };
+} & {
     /**
      * The center of the map, supports .sync modifier
      */
@@ -111,11 +117,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
         custom: boolean;
-    };
-    options: {
-        readonly type: ObjectConstructor;
-        readonly default: () => {};
-        readonly custom: true;
     };
 }, {
     root: import("vue").Ref<HTMLElement | undefined>;
@@ -831,6 +832,12 @@ declare const _sfc_main: import("vue").DefineComponent<{
     } | undefined>;
     attrs: Data;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ready" | "update:zoom" | "update:center" | "update:bounds")[], "ready" | "update:zoom" | "update:center" | "update:bounds", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    readonly options: {
+        readonly type: ObjectConstructor;
+        readonly default: () => {};
+        readonly custom: true;
+    };
+} & {
     /**
      * The center of the map, supports .sync modifier
      */
@@ -941,18 +948,13 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
         custom: boolean;
     };
-    options: {
-        readonly type: ObjectConstructor;
-        readonly default: () => {};
-        readonly custom: true;
-    };
 }>> & {
     onReady?: ((...args: any[]) => any) | undefined;
     "onUpdate:zoom"?: ((...args: any[]) => any) | undefined;
     "onUpdate:center"?: ((...args: any[]) => any) | undefined;
     "onUpdate:bounds"?: ((...args: any[]) => any) | undefined;
 }, {
-    options: Record<string, any>;
+    readonly options: Record<string, any>;
     worldCopyJump: boolean;
     inertia: boolean;
     zoomAnimation: boolean;

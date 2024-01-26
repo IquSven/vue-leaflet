@@ -4,28 +4,31 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { controlProps, setupControl } from "./control";
 
-export const controlLayersProps = {
-  ...controlProps,
-  collapsed: {
-    type: Boolean,
-    default: undefined,
-  },
-  autoZIndex: {
-    type: Boolean,
-    default: undefined,
-  },
-  hideSingleBase: {
-    type: Boolean,
-    default: undefined,
-  },
-  sortLayers: {
-    type: Boolean,
-    default: undefined,
-  },
-  sortFunction: {
-    type: Function,
-  },
-} as const;
+export const controlLayersProps = Object.assign(
+  {},
+  controlProps,
+  {
+    collapsed: {
+      type: Boolean,
+      default: undefined,
+    },
+    autoZIndex: {
+      type: Boolean,
+      default: undefined,
+    },
+    hideSingleBase: {
+      type: Boolean,
+      default: undefined,
+    },
+    sortLayers: {
+      type: Boolean,
+      default: undefined,
+    },
+    sortFunction: {
+      type: Function,
+    },
+  }
+);
 
 export const setupControlLayers = (props, leafletRef) => {
   const { options: controlOptions } = setupControl(props, leafletRef);

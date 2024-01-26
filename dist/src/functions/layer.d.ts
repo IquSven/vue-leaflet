@@ -2,29 +2,30 @@ import type L from "leaflet";
 import { type PropType, type Ref } from "vue";
 import type { LayerType } from "../types/enums/LayerType";
 export declare const layerProps: {
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: PropType<LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
+    };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: PropType<LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
     };
 };
 export declare const setupLayer: <T extends L.Layer>(props: any, leafletRef: Ref<T>, context: any) => {

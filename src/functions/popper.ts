@@ -2,25 +2,27 @@ import { h } from "vue";
 
 import { componentProps, setupComponent } from "./component";
 
-export const popperProps = {
-  ...componentProps,
+export const popperProps = Object.assign({}, componentProps, {
   content: {
     type: String,
     default: null,
   },
-} as const;
+});
 
 export const setupPopper = (props, leafletRef) => {
   const { options, methods: componentMethods } = setupComponent(props);
 
-  const methods = {
-    ...componentMethods,
-    setContent(newVal) {
-      if (leafletRef.value && newVal !== null && newVal !== undefined) {
-        leafletRef.value.setContent(newVal);
-      }
-    },
-  };
+  const methods = Object.assign(
+    {},
+    componentMethods,
+    {
+      setContent(newVal) {
+        if (leafletRef.value && newVal !== null && newVal !== undefined) {
+          leafletRef.value.setContent(newVal);
+        }
+      },
+    }
+  );
 
   return { options, methods };
 };

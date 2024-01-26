@@ -77,6 +77,8 @@ export default defineComponent({
       if (shouldBlankIcon(options, context)) {
         options.icon = divIcon({ className: "" });
       }
+      if (!props.latLng)
+        return console.error("LMarker: latLng prop is required");
       leafletObject.value = markRaw<L.Marker>(marker(props.latLng, options));
 
       const { listeners } = remapEvents(context.attrs);
@@ -84,11 +86,11 @@ export default defineComponent({
 
       leafletObject.value.on("move", eventHandlers.moveHandler);
       propsBinder(methods, leafletObject.value, props);
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       ready.value = true;
       nextTick(() => context.emit("ready", leafletObject.value));
     });

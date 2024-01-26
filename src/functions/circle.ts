@@ -4,15 +4,14 @@ import { propsToLeafletOptions } from "@src/utils";
 
 import { circleMarkerProps, setupCircleMarker } from "./circleMarker";
 
-export const circleProps = {
-  ...circleMarkerProps,
+export const circleProps = Object.assign({}, circleMarkerProps, {
   /**
    * Radius of the circle in meters.
    */
   radius: {
     type: Number,
   },
-} as const;
+});
 export type LCircleProps = typeof circleProps;
 
 export const setupCircle = (props, leafletRef, context) => {
@@ -25,9 +24,7 @@ export const setupCircle = (props, leafletRef, context) => {
     circleMarkerOptions
   );
 
-  const methods = {
-    ...circleMarkerMethods,
-  };
+  const methods = Object.assign({}, circleMarkerMethods);
 
   return { options, methods };
 };

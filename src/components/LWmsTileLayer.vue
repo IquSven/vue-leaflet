@@ -42,7 +42,7 @@ export default defineComponent({
       const { tileLayer }: typeof L = useGlobalLeaflet
         ? WINDOW_OR_GLOBAL.L
         : await import("leaflet/dist/leaflet-src.esm");
-
+      if (!props.url) throw new Error("url is required");
       leafletObject.value = markRaw<L.TileLayer.WMS>(
         tileLayer.wms(props.url, options)
       );
@@ -51,11 +51,11 @@ export default defineComponent({
       leafletObject.value.on(listeners);
 
       propsBinder(methods, leafletObject.value, props);
-      addLayer({
-        ...props,
-        ...methods,
-        leafletObject: leafletObject.value,
-      });
+      addLayer(
+        Object.assign({}, props, methods, {
+          leafletObject: leafletObject.value,
+        })
+      );
       nextTick(() => context.emit("ready", leafletObject.value));
     });
 

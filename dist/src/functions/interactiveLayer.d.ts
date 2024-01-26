@@ -1,36 +1,38 @@
 import type L from "leaflet";
 export declare const interactiveLayerProps: {
-    readonly interactive: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly bubblingMouseEvents: {
-        readonly type: BooleanConstructor;
-        readonly default: undefined;
-    };
-    readonly pane: {
-        readonly type: StringConstructor;
-    };
-    readonly attribution: {
-        readonly type: StringConstructor;
-    };
-    readonly name: {
-        readonly type: StringConstructor;
-        readonly custom: true;
-    };
-    readonly layerType: {
-        readonly type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
-        readonly custom: true;
-    };
-    readonly visible: {
-        readonly type: BooleanConstructor;
-        readonly custom: true;
-        readonly default: true;
-    };
     readonly options: {
         readonly type: ObjectConstructor;
         readonly default: () => {};
         readonly custom: true;
+    };
+} & {
+    pane: {
+        type: StringConstructor;
+    };
+    attribution: {
+        type: StringConstructor;
+    };
+    name: {
+        type: StringConstructor;
+        custom: boolean;
+    };
+    layerType: {
+        type: import("vue").PropType<import("../types/enums/LayerType").LayerType>;
+        custom: boolean;
+    };
+    visible: {
+        type: BooleanConstructor;
+        custom: boolean;
+        default: boolean;
+    };
+} & {
+    interactive: {
+        type: BooleanConstructor;
+        default: undefined;
+    };
+    bubblingMouseEvents: {
+        type: BooleanConstructor;
+        default: undefined;
     };
 };
 export declare const setupInteractiveLayer: (props: any, leafletRef: any, context: any) => {

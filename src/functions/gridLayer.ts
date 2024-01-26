@@ -10,31 +10,34 @@ export type VueGridLayerTileRenderer = (props: {
   coords: L.Point;
 }) => () => VNode;
 
-export const gridLayerProps = {
-  ...layerProps,
-  opacity: {
-    type: Number,
-  },
-  zIndex: {
-    type: Number,
-  },
-  tileSize: {
-    type: [Number, Array, Object] as PropType<Number | L.PointExpression>,
-  },
-  noWrap: {
-    type: Boolean,
-    default: undefined,
-  },
-  minZoom: {
-    type: Number,
-  },
-  maxZoom: {
-    type: Number,
-  },
-  className: {
-    type: String,
-  },
-} as const;
+export const gridLayerProps = Object.assign(
+  {},
+  layerProps,
+  {
+    opacity: {
+      type: Number,
+    },
+    zIndex: {
+      type: Number,
+    },
+    tileSize: {
+      type: [Number, Array, Object] as PropType<Number | L.PointExpression>,
+    },
+    noWrap: {
+      type: Boolean,
+      default: undefined,
+    },
+    minZoom: {
+      type: Number,
+    },
+    maxZoom: {
+      type: Number,
+    },
+    className: {
+      type: String,
+    },
+  }
+);
 
 export const setupGridLayer = (props, leafletRef, context) => {
   const { options: layerOptions, methods: layerMethods } = setupLayer(
@@ -49,12 +52,15 @@ export const setupGridLayer = (props, leafletRef, context) => {
     layerOptions
   );
 
-  const methods = {
-    ...layerMethods,
-    setTileComponent() {
-      leafletRef.value?.redraw();
-    },
-  };
+  const methods = Object.assign(
+    {},
+    layerMethods,
+    {
+      setTileComponent() {
+        leafletRef.value?.redraw();
+      },
+    }
+  );
 
   onUnmounted(() => {
     leafletRef.value.off();
